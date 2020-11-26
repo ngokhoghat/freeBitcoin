@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 
 const URL_LOGIN = "https://freebitco.in/?op=signup_page";
 
