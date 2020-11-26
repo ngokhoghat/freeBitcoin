@@ -24,6 +24,7 @@ const freeBitcoin = {
     setTimeout(() => freeBitcoin.init(), 1000 * 60 * 60);
   },
   getHomePage: async () => {
+    console.log("Get bitcoin running ...");
     const browser = await puppeteer.launch();
 
     const page = await browser.newPage();
