@@ -20,6 +20,8 @@ const free_play_form_button = "#free_play_form_button";
 const freeBitcoin = {
   init: () => {
     freeBitcoin.getHomePage();
+
+    setTimeout(() => freeBitcoin.init(), 1000 * 60 * 60);
   },
   getHomePage: async () => {
     const browser = await puppeteer.launch();
