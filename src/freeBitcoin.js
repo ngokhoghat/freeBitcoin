@@ -70,7 +70,7 @@ const freeBitcoin = {
       setTimeout(() => {
         console.log("reconnecting ....");
         freeBitcoin.init();
-      }, 1000 * 60 * 5);
+      }, 1000 * 30);
     }
   },
 };
