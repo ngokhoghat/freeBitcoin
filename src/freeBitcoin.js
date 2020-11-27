@@ -19,54 +19,55 @@ const free_play_form_button = "#free_play_form_button";
 
 const freeBitcoin = {
   init: () => {
-    try {
-      freeBitcoin.getHomePage();
-    } catch (error) {
-      setTimeout(() => {
-        console.log(error);
-        console.log("reconnecting ....");
-        freeBitcoin.init();
-      }, 3000);
-    }
-
+    freeBitcoin.getHomePage();
   },
   getHomePage: async () => {
-    console.log("Get bitcoin running ...");
-    const browser = await puppeteer.launch({
-      // executablePath: "/usr/bin/chromium-browser",
-    });
+    try {
+      console.log("Get bitcoin running ...");
+      const browser = await puppeteer.launch({
+        // executablePath: "/usr/bin/chromium-browser",
+      });
 
-    const page = await browser.newPage();
+      const page = await browser.newPage();
 
-    await page.goto(URL_LOGIN);
+      await page.goto(URL_LOGIN);
 
-    await page.waitFor(1000);
-    await page.waitFor(cancleCooke);
-    await page.$eval(cancleCooke, (elem) => elem.click());
+      await page.waitFor(1000);
+      await page.waitFor(cancleCooke);
+      await page.$eval(cancleCooke, (elem) => elem.click());
 
-    await page.waitFor(1000);
-    await page.waitFor(loginBtn);
-    await page.$eval(loginBtn, (elem) => elem.click());
+      await page.waitFor(1000);
+      await page.waitFor(loginBtn);
+      await page.$eval(loginBtn, (elem) => elem.click());
 
-    await page.waitFor(emailInput);
-    await page.type(emailInput, userName);
+      await page.waitFor(emailInput);
+      await page.type(emailInput, userName);
 
-    await page.waitFor(passwordInput);
-    await page.type(passwordInput, passWord);
+      await page.waitFor(passwordInput);
+      await page.type(passwordInput, passWord);
 
-    await page.waitFor(submitLoginBtn);
-    await page.$eval(submitLoginBtn, (elem) => elem.click());
+      await page.waitFor(submitLoginBtn);
+      await page.$eval(submitLoginBtn, (elem) => elem.click());
 
-    await page.waitFor(3000);
-    await page.waitFor(playWithoutCaptcha);
-    await page.$eval(playWithoutCaptcha, (elem) => elem.click());
+      await page.waitFor(3000);
+      await page.waitFor(playWithoutCaptcha);
+      await page.$eval(playWithoutCaptcha, (elem) => elem.click());
 
-    await page.waitFor(free_play_form_button);
-    await page.$eval(free_play_form_button, (elem) => elem.click());
+      await page.waitFor(free_play_form_button);
+      await page.$eval(free_play_form_button, (elem) => elem.click());
 
-    await browser.close();
+      await browser.close();
 
-    return setTimeout(() => freeBitcoin.init(), 1000 * 60 * 60);
+      return setTimeout(() => freeBitcoin.init(), 1000 * 60 * 60);
+    } catch (error) {
+      console.log("error");
+      setTimeout(() => {
+        console.log("reconnecting ....");
+        freeBitcoin.init();
+      }, 1000 * 60 * 5);
+    }
+
+
   },
 };
 
