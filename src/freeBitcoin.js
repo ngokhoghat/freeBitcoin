@@ -1,4 +1,11 @@
 const pupperteerModule = process.env.MODE ? "puppeteer" : "puppeteer-core";
+
+const appConfig = process.env.MODE
+  ? {}
+  : {
+      executablePath: "/usr/bin/chromium-browser",
+    };
+
 const puppeteer = require(pupperteerModule);
 
 const URL_LOGIN = "https://freebitco.in/?op=signup_page";
@@ -25,9 +32,7 @@ const freeBitcoin = {
   getHomePage: async () => {
     try {
       console.log("Get bitcoin running ...");
-      const browser = await puppeteer.launch({
-        // executablePath: "/usr/bin/chromium-browser",
-      });
+      const browser = await puppeteer.launch(appConfig);
 
       const page = await browser.newPage();
 
