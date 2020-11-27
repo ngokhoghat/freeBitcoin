@@ -1,4 +1,5 @@
-const puppeteer = require("puppeteer");
+const pupperteerModule = process.env.MODE ? "puppeteer" : "puppeteer-core";
+const puppeteer = require(pupperteerModule);
 
 const URL_LOGIN = "https://freebitco.in/?op=signup_page";
 
@@ -66,8 +67,6 @@ const freeBitcoin = {
         freeBitcoin.init();
       }, 1000 * 60 * 5);
     }
-
-
   },
 };
 

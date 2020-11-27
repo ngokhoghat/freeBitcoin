@@ -1,3 +1,4 @@
+require("dotenv").config();
 const freeBitcoin = require("./src/freeBitcoin");
 
 (async () => {
