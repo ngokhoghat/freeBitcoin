@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
 
 const URL_LOGIN = "https://freebitco.in/?op=signup_page";
 
@@ -19,14 +19,21 @@ const free_play_form_button = "#free_play_form_button";
 
 const freeBitcoin = {
   init: () => {
-    freeBitcoin.getHomePage();
+    try {
+      freeBitcoin.getHomePage();
+    } catch (error) {
+      setTimeout(() => {
+        console.log(error);
+        console.log("reconnecting ....");
+        freeBitcoin.init();
+      }, 3000);
+    }
 
-    setTimeout(() => freeBitcoin.init(), 1000 * 60 * 60);
   },
   getHomePage: async () => {
     console.log("Get bitcoin running ...");
     const browser = await puppeteer.launch({
-      executablePath: "/usr/bin/chromium-browser",
+      // executablePath: "/usr/bin/chromium-browser",
     });
 
     const page = await browser.newPage();
@@ -58,6 +65,8 @@ const freeBitcoin = {
     await page.$eval(free_play_form_button, (elem) => elem.click());
 
     await browser.close();
+
+    return setTimeout(() => freeBitcoin.init(), 1000 * 60 * 60);
   },
 };
 
